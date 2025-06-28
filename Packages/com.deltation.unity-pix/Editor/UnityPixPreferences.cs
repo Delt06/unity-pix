@@ -24,7 +24,7 @@ namespace DELTation.UnityPix.Editor
                 guiHandler = _ =>
                 {
                     EditorGUI.BeginChangeCheck();
-                    string captureFolderPath = EditorGUILayout.TextField("Enable Feature", CaptureFolderName);
+                    string captureFolderPath = EditorGUILayout.TextField("Capture Folder (Relative)", CaptureFolderName);
                     if (EditorGUI.EndChangeCheck())
                     {
                         CaptureFolderName = captureFolderPath;
