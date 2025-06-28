@@ -1,0 +1,26 @@
+name: Build Native Plugin
+
+on:
+    push:
+        branches:
+            - master
+            - dev
+    pull_request:
+        branches:
+            - master
+            - dev
+    workflow_dispatch:
+
+jobs:
+    compile:
+        name: Build Native Plugin (Win32) with CMake
+        runs-on: windows-latest
+        steps:
+            -   uses: actions/checkout@v2
+            -   uses: ilammy/msvc-dev-cmd@v1
+            -   name: Build Project
+                uses: threeal/cmake-action@v2.1.0
+                with:
+                    generator: Ninja
+                    cxx-compiler: cl
+                
