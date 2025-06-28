@@ -29,4 +29,4 @@ Add the following line to `Packages/manifest.json`:
 
 ## How to use
 
-For usage instructions please follow the [Wiki](todo) page.
+For usage instructions please follow the [Wiki](https://github.com/Delt06/unity-pix/wiki/Usage) page.
