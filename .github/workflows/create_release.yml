@@ -1,4 +1,4 @@
-name: Version Tag
+name: Create Release
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    name: Create Version Tag
+    name: Create Release
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -44,9 +44,5 @@ jobs:
           name: ${{ steps.create_tag.outputs.version }}
           tag: ${{ steps.create_tag.outputs.version }}
           body: |
-            ```bash
-            npm i @uiw/react-heat-map@${{steps.create_tag.outputs.versionNumber}}
-            ```
-            
             ${{ steps.changelog.outputs.compareurl }}
             ${{ steps.changelog.outputs.changelog }}
