@@ -1,36 +1,52 @@
 name: Version Tag
 
 on:
-    push:
-        branches:
-            - master
-        paths-ignore:
-            - '.github/**/*.yml'
-            - '.gitignore'
-    workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '.github/**/*.yml'
+      - '.gitignore'
+  workflow_dispatch:
 
 jobs:
-    build:
-        name: Create Version Tag
-        runs-on: ubuntu-latest
-        permissions:
-            contents: write
-        steps:
-            -   name: Checkout
-                uses: actions/checkout@v4
-            -   name: Fetch tags
-                run: git fetch --prune --unshallow --tags
-            -   run: git describe --tags --abbrev=0
-            -   run: echo "previous_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo '')" >> $GITHUB_ENV
-            -   name: Create Tag
-                id: create_tag
-                uses: jaywcjlove/create-tag-action@main
-                if: env.previous_tag
-                with:
-                    package-path: Packages/com.deltation.unity-pix/package.json
-            -   name: Generate Changelog
-                id: changelog
-                uses: jaywcjlove/changelog-generator@main
-                if: steps.create_tag.outputs.successful == 'true'
-                with:
-                    head-ref: ${{steps.create_tag.outputs.version}}
+  build:
+    name: Create Version Tag
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Fetch tags
+        run: git fetch --prune --unshallow --tags
+      - run: git describe --tags --abbrev=0
+      - run: echo "previous_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo '')" >> $GITHUB_ENV
+      - name: Create Tag
+        id: create_tag
+        uses: jaywcjlove/create-tag-action@main
+        if: env.previous_tag
+        with:
+          package-path: Packages/com.deltation.unity-pix/package.json
+      - name: Generate Changelog
+        id: changelog
+        uses: jaywcjlove/changelog-generator@main
+        if: steps.create_tag.outputs.successful == 'true'
+        with:
+          head-ref: ${{steps.create_tag.outputs.version}}
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        if: steps.create_tag.outputs.successful == 'true'
+        with:
+          allowUpdates: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: ${{ steps.create_tag.outputs.version }}
+          tag: ${{ steps.create_tag.outputs.version }}
+          body: |
+            ```bash
+            npm i @uiw/react-heat-map@${{steps.create_tag.outputs.versionNumber}}
+            ```
+            
+            ${{ steps.changelog.outputs.compareurl }}
+            ${{ steps.changelog.outputs.changelog }}
