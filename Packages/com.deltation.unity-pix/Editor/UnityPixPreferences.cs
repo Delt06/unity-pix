@@ -26,7 +26,7 @@ namespace DELTation.UnityPix.Editor
                     EditorGUI.BeginChangeCheck();
                     string captureFolderPath = EditorGUILayout.TextField("Capture Folder (Relative)", CaptureFolderName);
                     if (EditorGUI.EndChangeCheck())
-                    { 
+                    {
                         CaptureFolderName = captureFolderPath;
                     }
                 },
