@@ -1,7 +1,7 @@
 {
     "name": "com.deltation.unity-pix",
     "displayName": "Unity PIX",
-    "description": "PIX for Windows integration for Unity.",
+    "description": "A PIX on Windows integration for Unity, allowing to make GPU captures right from the Unity Editor.",
     "version": "0.1.0",
     "unity": "2021.3",
     "unityRelease": "0f1",
