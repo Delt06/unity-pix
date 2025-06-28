@@ -15,6 +15,9 @@ jobs:
     compile:
         name: Build Native Plugin (Win32) with CMake
         runs-on: windows-latest
+        strategy:
+            matrix:
+                cmake-build-type: [ 'Debug', 'Release' ]
         steps:
             -   uses: actions/checkout@v2
             -   uses: ilammy/msvc-dev-cmd@v1
@@ -24,4 +27,5 @@ jobs:
                     source-dir: UnityPix
                     generator: Ninja
                     cxx-compiler: cl
-                
+                    options:
+                        CMAKE_BUILD_TYPE=${{ matrix.cmake-build-type }}
