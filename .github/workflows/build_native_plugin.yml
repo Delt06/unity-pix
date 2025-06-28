@@ -12,8 +12,8 @@ on:
     workflow_dispatch:
 
 jobs:
-    compile:
-        name: Build Native Plugin (Win32) with CMake
+    build:
+        name: Build Native Plugin with CMake (${{ matrix.cmake-build-type }})
         runs-on: windows-latest
         strategy:
             matrix:
