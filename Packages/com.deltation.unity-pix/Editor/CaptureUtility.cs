@@ -103,6 +103,9 @@ namespace DELTation.UnityPix.Editor
                 try
                 {
                     Debug.Log("Unity PIX: successfully took a PIX capture: " + Path.GetFullPath(_pendingCaptureFilePath));
+
+                    await Task.Yield();
+
                     UnityPixBindings.OpenPixCapture(_pendingCaptureFilePath);
                 }
                 finally
