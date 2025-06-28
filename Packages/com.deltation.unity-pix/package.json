@@ -1,0 +1,13 @@
+{
+    "name": "com.deltation.unity-pix",
+    "displayName": "Unity PIX",
+    "description": "PIX for Windows integration for Unity.",
+    "version": "0.1.0",
+    "unity": "2021.3",
+    "unityRelease": "0f1",
+    "author": {
+        "name": "Vladislav Kantaev",
+        "email": "vvkantaev3@gmail.com",
+        "url": "https://deltation.com/"
+    }
+}

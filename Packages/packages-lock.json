@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.deltation.unity-pix": {
+      "version": "file:com.deltation.unity-pix",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.collab-proxy": {
       "version": "2.8.2",
       "depth": 0,

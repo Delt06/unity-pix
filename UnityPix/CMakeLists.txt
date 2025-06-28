@@ -37,7 +37,7 @@ if (MSVC)
             /DEF:${CMAKE_CURRENT_SOURCE_DIR}/src/main.def
     )
 
-    SET(TARGET_DLL_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Assets/Plugins/UnityPix/x64")
+    SET(TARGET_DLL_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Packages/com.deltation.unity-pix/Plugins/UnityPix/x64")
     add_custom_command(TARGET UnityPix POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy
             $<TARGET_FILE:UnityPix>

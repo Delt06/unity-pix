@@ -2,6 +2,7 @@ Library/
 Temp/
 UserSettings/
 Logs/
+obj/
 .idea/
 *.sln
 *.csproj
