@@ -6,3 +6,4 @@ obj/
 .idea/
 *.sln
 *.csproj
+*.sln.DotSettings.user

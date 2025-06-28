@@ -85,23 +85,6 @@ extern "C" uint32_t UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API IsPixLoaded()
     return GetModuleHandleW(L"WinPixGpuCapturer.dll") != nullptr;
 }
 
-extern "C" uint32_t UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API BeginPixCapture(IN LPWSTR filePath)
-{
-    PIXCaptureParameters pixCaptureParameters = {};
-    pixCaptureParameters.GpuCaptureParameters.FileName = filePath;
-    return PIXBeginCapture(PIX_CAPTURE_GPU, &pixCaptureParameters);
-}
-
-extern "C" uint32_t UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API EndPixCapture()
-{
-    HRESULT result;
-    while ((result = PIXEndCapture(FALSE)) == E_PENDING)
-    {
-        // Keep running
-    }
-    return result;
-}
-
 extern "C" uint32_t UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API
 PixGpuCaptureNextFrames(IN PCWSTR fileName, IN UINT32 numFrames)
 {
@@ -125,7 +108,7 @@ UnityPluginLoad(IUnityInterfaces* unityInterfaces)
     s_UnityInterfaces = unityInterfaces;
     if (s_UnityInterfaces == nullptr)
     {
-        std::cerr << "The pointer to IUnityInterfaces is nullptr" << std::endl;
+        std::cerr << "Unity PIX: the pointer to IUnityInterfaces is nullptr" << std::endl;
         return;
     }
 
@@ -146,19 +129,19 @@ UnityPluginLoad(IUnityInterfaces* unityInterfaces)
                 pathResult.has_value())
             {
                 LoadLibraryW(pathResult.value().c_str());
-                UNITY_LOG(s_Log, "Loaded WinPixGpuCapturer.dll.");
+                UNITY_LOG(s_Log, "Unity PIX: loaded WinPixGpuCapturer.dll.");
 
                 // Hide the overlay
                 PIXSetHUDOptions(PIX_HUD_SHOW_ON_NO_WINDOWS);
             }
             else
             {
-                UNITY_LOG_ERROR(s_Log, "Failed to find PIX installation.");
+                UNITY_LOG_ERROR(s_Log, "Unity PIX: failed to find PIX installation.");
             }
         }
         else
         {
-            UNITY_LOG(s_Log, "WinPixGpuCapturer.dll is already loaded.");
+            UNITY_LOG(s_Log, "Unity PIX: WinPixGpuCapturer.dll is already loaded.");
         }
     }
 

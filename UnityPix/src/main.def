@@ -7,7 +7,5 @@ EXPORTS
    UnityPluginLoad
    UnityPluginUnload
    IsPixLoaded
-   BeginPixCapture
-   EndPixCapture
    PixGpuCaptureNextFrames
    OpenPixCapture
