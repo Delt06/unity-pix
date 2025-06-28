@@ -1,0 +1,31 @@
+name: Version Tag
+
+on:
+    push:
+        branches:
+            - master
+        paths-ignore:
+            - '.github/**/*.yml'
+            - '.gitignore'
+    workflow_dispatch:
+
+jobs:
+    build:
+        name: Create Version Tag
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            -   run: echo "previous_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo '')" >> $GITHUB_ENV
+            -   name: Create Tag
+                id: create_tag
+                uses: jaywcjlove/create-tag-action@main
+                if: env.previous_tag
+                with:
+                    package-path: Packages/com.deltation.unity-pix/package.json
+            -   name: Generate Changelog
+                id: changelog
+                uses: jaywcjlove/changelog-generator@main
+                if: steps.create_tag.outputs.successful == 'true'
+                with:
+                    head-ref: ${{steps.create_tag.outputs.version}}
