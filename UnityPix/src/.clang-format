@@ -1,0 +1,5 @@
+BasedOnStyle: InheritParentConfig
+Language: Cpp
+SeparateDefinitionBlocks: Always
+BreakTemplateDeclarations: Yes
+SortIncludes: true

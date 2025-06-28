@@ -1,0 +1,25 @@
+WarningsAsErrors: '*'
+
+CheckOptions:
+  - key: readability-identifier-naming.PrivateMemberPrefix
+    value: "m_"
+  - key: readability-identifier-naming.PrivateMemberCase
+    value: "CamelCase"
+  - key: readability-identifier-naming.ConstantPointerParameterPrefix
+    value: "p"
+  - key: readability-identifier-naming.ConstantPointerParameterCase
+    value: "CamelCase"
+  - key: readability-identifier-naming.PointerParameterPrefix
+    value: "p"
+  - key: readability-identifier-naming.PointerParameterCase
+    value: "CamelCase"
+  - key: readability-identifier-naming.LocalPointerPrefix
+    value: "p"
+  - key: readability-identifier-naming.LocalPointerCase
+    value: "CamelCase"
+  - key: readability-identifier-naming.LocalConstantPointerPrefix
+    value: "p"
+  - key: readability-identifier-naming.LocalConstantPointerCase
+    value: "CamelCase"
+  - key: readability-identifier-naming.ClassMethodCase
+    value: "CamelCase"

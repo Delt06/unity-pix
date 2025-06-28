@@ -1,0 +1,10 @@
+BasedOnStyle: Microsoft
+BinPackParameters: false
+AllowShortFunctionsOnASingleLine: All
+AlignConsecutiveDeclarations: true
+BreakConstructorInitializers: BeforeComma
+PointerAlignment: Left
+AccessModifierOffset: -4
+NamespaceIndentation: All
+ColumnLimit: 100
+SortIncludes: false
