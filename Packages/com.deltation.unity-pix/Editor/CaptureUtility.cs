@@ -89,7 +89,7 @@ namespace DELTation.UnityPix.Editor
                 EditorApplication.update -= WaitForRenderFinish;
 
                 while (!_pendingCaptureFence.passed)
-                { 
+                {
                     await Task.Yield();
                 }
 
