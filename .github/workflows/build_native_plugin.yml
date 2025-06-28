@@ -1,0 +1,31 @@
+name: Build Native Plugin
+
+on:
+    push:
+        branches:
+            - master
+            - dev
+    pull_request:
+        branches:
+            - master
+            - dev
+    workflow_dispatch:
+
+jobs:
+    build:
+        name: Build Native Plugin with CMake (${{ matrix.cmake-build-type }})
+        runs-on: windows-latest
+        strategy:
+            matrix:
+                cmake-build-type: [ 'Debug', 'Release' ]
+        steps:
+            -   uses: actions/checkout@v2
+            -   uses: ilammy/msvc-dev-cmd@v1
+            -   name: Build Project
+                uses: threeal/cmake-action@v2.1.0
+                with:
+                    source-dir: UnityPix
+                    generator: Ninja
+                    cxx-compiler: cl
+                    options:
+                        CMAKE_BUILD_TYPE=${{ matrix.cmake-build-type }}
